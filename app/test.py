@@ -19,5 +19,11 @@ class TestDockerapp(unittest.TestCase):
         assert b'2' in response.data
         assert b'two' in response.data
 
+    def test_load_unknown_value(self):
+        response = self.app.post('/', data=dict(submit='load', key='4711'))
+        assert response.status_code == 200
+        assert b'4711' in response.data
+        assert b'None' in response.data
+
 if __name__=='__main__':
     unittest.main()
